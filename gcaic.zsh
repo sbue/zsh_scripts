@@ -26,7 +26,8 @@ gcaic(){
 
   msg=$(codex --sandbox danger-full-access --ask-for-approval never \
     --prompt "$prompt" \
-    --output-format text 2>/dev/null | head -n1)
+    --output-format text 2>/dev/null \
+    | sed 's/^[[:space:]]*//' | sed '/^$/d' | head -n1)
 
   if [[ -z $msg ]]; then
     printf 'No commit message generated; aborting.\n' >&2
